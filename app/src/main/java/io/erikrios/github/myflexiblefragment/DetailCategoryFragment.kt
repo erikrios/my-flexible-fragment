@@ -12,6 +12,13 @@ class DetailCategoryFragment : Fragment() {
     private var _binding: FragmentDetailCategoryBinding? = null
     private val binding get() = _binding!!
 
+    var description: String? = null
+
+    companion object {
+        var EXTRA_NAME = "extra_name"
+        var EXTRA_DESCRIPTION = "extra_description"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +30,21 @@ class DetailCategoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        savedInstanceState.let {
+            val descFromBundle = savedInstanceState?.getString(EXTRA_DESCRIPTION)
+            description = descFromBundle
+        }
+
+        arguments?.let {
+            val categoryName = arguments?.getString(EXTRA_NAME)
+            binding.tvCategoryName.text = categoryName
+            binding.tvCategoryDescription.text = description
+        }
     }
 
     override fun onDestroy() {
