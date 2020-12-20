@@ -1,5 +1,6 @@
 package io.erikrios.github.myflexiblefragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,10 @@ class DetailCategoryFragment : Fragment() {
                 mFragmentManager,
                 OptionDialogFragment::class.java.simpleName
             )
+        }
+        binding.btnProfile.setOnClickListener {
+            val mIntent = Intent(activity, ProfileActivity::class.java)
+            startActivity(mIntent)
         }
     }
 
