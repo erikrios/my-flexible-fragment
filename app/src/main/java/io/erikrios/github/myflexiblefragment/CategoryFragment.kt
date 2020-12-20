@@ -23,6 +23,28 @@ class CategoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnDetailCategory.setOnClickListener {
+            val mDetailCategoryFragment = DetailCategoryFragment()
+
+            val mBundle = Bundle()
+            mBundle.putString(DetailCategoryFragment.EXTRA_NAME, "Lifestyle")
+            val description = "Kategori ini akan berisi produk-produk lifestyle"
+
+            mDetailCategoryFragment.arguments = mBundle
+            mDetailCategoryFragment.description = description
+
+            val mFragmentManager = fragmentManager
+            mFragmentManager?.beginTransaction()?.apply {
+                replace(
+                    R.id.frame_container,
+                    mDetailCategoryFragment,
+                    DetailCategoryFragment::class.java.simpleName
+                )
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
     override fun onDestroy() {
