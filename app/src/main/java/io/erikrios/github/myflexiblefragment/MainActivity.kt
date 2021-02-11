@@ -3,6 +3,7 @@ package io.erikrios.github.myflexiblefragment
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import io.erikrios.github.myflexiblefragment.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,10 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         if (fragment !is HomeFragment) {
             Log.d("MyFlexibleFragment", "Fragment Name : ${HomeFragment::class.java.simpleName}")
-            mFragmentManager
-                .beginTransaction()
-                .add(binding.frameContainer.id, mHomeFragment, HomeFragment::class.java.simpleName)
-                .commit()
+            mFragmentManager.commit {
+                add(binding.frameContainer.id, mHomeFragment, HomeFragment::class.java.simpleName)
+            }
         }
     }
 }

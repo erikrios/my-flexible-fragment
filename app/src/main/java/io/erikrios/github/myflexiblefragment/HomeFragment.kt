@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import io.erikrios.github.myflexiblefragment.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -25,15 +26,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnCategory.setOnClickListener {
             val mCategoryFragment = CategoryFragment()
-            val mFragmentManager = fragmentManager
-            mFragmentManager?.beginTransaction()?.apply {
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.commit {
+                addToBackStack(null)
                 replace(
                     R.id.frame_container,
                     mCategoryFragment,
                     CategoryFragment::class.java.simpleName
                 )
-                addToBackStack(null)
-                commit()
             }
         }
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import io.erikrios.github.myflexiblefragment.databinding.FragmentCategoryBinding
 
 class CategoryFragment : Fragment() {
@@ -34,15 +35,14 @@ class CategoryFragment : Fragment() {
             mDetailCategoryFragment.arguments = mBundle
             mDetailCategoryFragment.description = description
 
-            val mFragmentManager = fragmentManager
-            mFragmentManager?.beginTransaction()?.apply {
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.commit {
+                addToBackStack(null)
                 replace(
                     R.id.frame_container,
                     mDetailCategoryFragment,
                     DetailCategoryFragment::class.java.simpleName
                 )
-                addToBackStack(null)
-                commit()
             }
         }
     }
